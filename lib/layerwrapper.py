@@ -59,6 +59,10 @@ class WrappedGPT:
         self.scaler_row += torch.norm(inp, p=2, dim=1) ** 2  / self.nsamples
         self.sum_metric_row += torch.sum(inp, dim=1) / self.nsamples
 
+        if self.initial_method == "sparsegpt":
+            inp = math.sqrt(2 / self.nsamples) * inp.float()
+            self.H += inp.matmul(inp.t())
+
     def free(self):
         self.H = None
         torch.cuda.empty_cache()
