@@ -823,7 +823,7 @@ def prune_DSnoT(
                             reconstruction_error + pruning_metric - regrowing_metric
                         )
 
-                        if args.without_same_sign:
+                        if args.without_same_sign == str(True):
                             update_mask = update_mask & (
                                 abs(reconstruction_error) > args.update_threshold
                             )
