@@ -307,7 +307,7 @@ def prune_DSnoT_opt(args, model, tokenizer, device=torch.device("cuda:0"), prune
                         # change mask
                         reconstruction_error_after = reconstruction_error + pruning_metric - regrowing_metric
                         
-                        if args.without_same_sign:
+                        if args.without_same_sign == str(True):
                             update_mask = update_mask & (abs(reconstruction_error) > args.update_threshold) 
                         else:
                             update_mask = update_mask & (abs(reconstruction_error) > args.update_threshold) & (initialize_error_sign == torch.sign(reconstruction_error_after))
