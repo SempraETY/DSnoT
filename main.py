@@ -46,7 +46,7 @@ def main():
     parser.add_argument('--pow_of_var_pruning', type=float, default=1, help='The power of variance.')
     parser.add_argument("--skip_layer", type=str, default="mlp", choices=["no_skip", "mlp", "self_attn"])
     parser.add_argument("--skip_sub_layer", type=str, default="no_skip", choices=["no_skip", "q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "down_proj", "up_proj", "fc1", "fc2", "out_proj"])
-    parser.add_argument('--without_same_sign', type=bool, default=True, help="without same sign")
+    parser.add_argument('--without_same_sign', type=str, default="True", choices=["True", "False"], help="without same sign")
     
     parser.add_argument('--get_time_overhead', action="store_true", help="get time overhead")
     
