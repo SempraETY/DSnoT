@@ -53,22 +53,6 @@ def main():
     parser.add_argument("--output_results_file", default="results.txt", type=str)
     parser.add_argument("--cache_dir", default="llm_weights", type=str )
     parser.add_argument('--save_model', type=str, default=None, help='Path to save the pruned model.')
-    parser.add_argument('--max_global_iterations', type=int, default=3,
-                   help='每次加入新子层后进行的全局优化迭代次数')
-    parser.add_argument('--delta_h_tolerance', type=float, default=1.1,
-                       help='允许delta_h超过目标值的容忍度百分比')
-    parser.add_argument('--always_optimize', action='store_true',
-                       help='即使delta_h很小也始终执行优化')
-    parser.add_argument('--max_adjust_iterations', type=int, default=3,
-                       help='为满足delta_h目标而进行的最大掩码调整迭代次数')
-    parser.add_argument('--delta_h_gamma', type=int, default=0.1,
-                       help='gamma')
-    parser.add_argument('--global_objective_weight', type=float, default=0.5,
-                   help='权重用于平衡delta_h和重建误差，越高越重视delta_h')
-    parser.add_argument('--distributed', action='store_true',
-                       help='是否启用分布式训练')
-    parser.add_argument('--enable_layer_feedback', action='store_true',
-                       help='是否启用层间反馈优化')
     args = parser.parse_args()
 
     # Setting seeds for reproducibility
@@ -77,7 +61,7 @@ def main():
 
     # Handling different model types
     if not args.model_type:
-        if ["llama kind" for model_name in ["llm_weight", "vicuna"] if model_name in args.model]:
+        if ["llama kind" for model_name in ["llama", "vicuna"] if model_name in args.model]:
             args.model_type = "llama"
         elif "opt" in args.model:
             args.model_type = "opt"
